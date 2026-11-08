@@ -66,6 +66,11 @@ def main():
         expected_hash, size, path = line.split("\t", 2)
         if not path or path.startswith("/") or ".." in Path(path).parts:
             raise ValueError(f"Unsafe path: {path}")
+        # The public Site serves modified HTML, so its byte hashes cannot match
+        # the original source. Import only static assets here; source pages are
+        # synchronized separately and existing root files stay intact.
+        if not path.startswith("assets/"):
+            continue
         records.append((expected_hash, int(size), path))
 
     updated = 0
