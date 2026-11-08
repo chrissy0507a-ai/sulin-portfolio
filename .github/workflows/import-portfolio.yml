@@ -1,0 +1,33 @@
+name: Complete static portfolio import
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-portfolio.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Download and verify the original site
+        run: python3 .github/import_portfolio.py
+      - name: Commit missing and updated site files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Complete portfolio assets from verified source"
+            git push origin HEAD:main
+          fi
