@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" role="img" aria-labelledby="t d">
+  <title id="t">Countdown: one day to go</title>
+  <desc id="d">Typographic cover for the externally hosted WeChat Channels video</desc>
+  <rect width="720" height="960" fill="#e9e5d9"/>
+  <path d="M44 44H676V916H44Z" fill="none" stroke="#313b36" stroke-width="2"/>
+  <text x="78" y="112" fill="#313b36" font-family="Arial,sans-serif" font-size="27" letter-spacing="5">JINHAN FAIR / 2026</text>
+  <text x="78" y="454" fill="#2947cf" font-family="Georgia,serif" font-size="298" font-weight="bold">01</text>
+  <path d="M78 502H642" stroke="#313b36" stroke-width="2"/>
+  <text x="78" y="572" fill="#313b36" font-family="Arial,sans-serif" font-size="46" font-weight="bold" letter-spacing="4">DAY TO GO</text>
+  <text x="78" y="826" fill="#313b36" font-family="Arial,sans-serif" font-size="24" letter-spacing="2">WATCH ON WECHAT CHANNELS</text>
+  <text x="78" y="868" fill="#313b36" font-family="Arial,sans-serif" font-size="18">External original post ↗</text>
+</svg>
