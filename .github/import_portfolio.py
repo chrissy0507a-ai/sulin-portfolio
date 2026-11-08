@@ -7,10 +7,10 @@ The manifest records hashes of the exact files from the Site source checkout.
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 from pathlib import Path
+import subprocess
 import tempfile
 import time
 from urllib.parse import quote
-from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,21 +29,27 @@ def import_one(record):
         if hashlib.sha256(destination.read_bytes()).hexdigest() == expected_hash:
             return False
 
-    request = Request(BASE_URL + quote(relative_path, safe="/"), headers={"User-Agent": "PortfolioStaticImport/1.0"})
+    url = BASE_URL + quote(relative_path, safe="/")
     for attempt in range(4):
         temp_path = None
         try:
             digest = hashlib.sha256()
             size = 0
-            with urlopen(request, timeout=90) as response:
-                with tempfile.NamedTemporaryFile(dir=destination.parent, delete=False) as temp:
-                    temp_path = Path(temp.name)
-                    while chunk := response.read(1024 * 1024):
-                        temp.write(chunk)
-                        digest.update(chunk)
-                        size += len(chunk)
+            with tempfile.NamedTemporaryFile(dir=destination.parent, delete=False) as temp:
+                temp_path = Path(temp.name)
+            subprocess.run(
+                ["curl", "--fail", "--location", "--silent", "--show-error",
+                 "--retry", "2", "--max-time", "180", "--user-agent",
+                 "Mozilla/5.0 (compatible; PortfolioStaticImport/1.0)",
+                 "--output", str(temp_path), url],
+                check=True,
+            )
+            with temp_path.open("rb") as downloaded:
+                while chunk := downloaded.read(1024 * 1024):
+                    digest.update(chunk)
+                    size += len(chunk)
             if size != expected_size or digest.hexdigest() != expected_hash:
-                raise ValueError(f"File checksum mismatch: {relative_path} ({size} bytes)")
+                raise ValueError(f"File checksum mismatch: {relative_path} ({size} bytes, sha256={digest.hexdigest()})")
             temp_path.replace(destination)
             return True
         except Exception:
