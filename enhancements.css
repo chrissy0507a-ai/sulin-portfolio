@@ -20,7 +20,7 @@ body{font-size:17px;line-height:1.75}
 .scene-perspective{top:12%;right:-7%;width:min(75vw,1260px)}
 .scene-label{font-size:14px;padding:8px 12px}
 .scene-pin{position:relative;width:30px;height:30px;font-size:13px}
-.point-momo{left:78%}
+.point-judydoll{left:78%}
 .scene-point.is-visited .scene-pin{background:var(--orange)}
 .scene-point.is-visited .scene-pin:after{content:'✓';position:absolute;top:-5px;right:-5px;background:var(--cream);color:var(--orange);border:1px solid var(--orange);width:17px;height:17px;display:grid;place-items:center;border-radius:50%;font-size:11px}
 .scene-point:focus-visible{outline:0}
@@ -101,7 +101,7 @@ html[lang=en] .nav-links{gap:18px;font-size:14px}
  .scene-perspective{top:435px;left:50%;right:auto;width:116vw;max-width:640px}
  .scene-label{font-size:12px;padding:7px 9px;max-width:155px;white-space:normal;text-align:center;line-height:1.4}
  .scene-point{gap:6px}.scene-pin{width:26px;height:26px;font-size:11px}
- .point-jinhan{left:25%;top:32%}.point-motion{top:23%}.point-momo{left:77%;top:51%}.point-editorial{left:30%;top:76%}.point-home{left:68%;top:83%}
+ .point-jinhan{left:25%;top:32%}.point-motion{top:23%}.point-judydoll{left:77%;top:51%}.point-editorial{left:30%;top:76%}.point-home{left:68%;top:83%}
  .studio-bottom{left:24px;right:24px;bottom:24px;flex-wrap:wrap;gap:14px;align-items:center}
  .studio-view{font-size:12px;order:1}.studio-view>*{padding:8px 11px}.motion-toggle{font-size:12px;order:2;margin-left:auto}
  .scene-hint.exploration{width:100%;order:0;font-size:12px;justify-content:center;opacity:.85}

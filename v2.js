@@ -5,36 +5,23 @@
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
   const motionAllowed = () => !reduced.matches && root.dataset.motion !== 'paused';
 
-  // Filtering changes visibility only; the five projects and their URLs remain intact.
+  // Filtering preserves project links and the selected category across language changes.
   const filters = [...document.querySelectorAll('[data-work-filter]')];
-  const works = [...document.querySelectorAll('.work-row[data-categories]')];
+  const works = [...document.querySelectorAll('.work-panel[data-categories]')];
+  const status = document.querySelector('.work-filter-status');
+  function updateFilterStatus() {
+    if (!status) return;
+    const count = works.filter(row => !row.hidden).length;
+    status.textContent = root.lang === 'en' ? `${count} sections` : `显示 ${count} 个板块`;
+  }
+  document.addEventListener('portfolio:languagechange', updateFilterStatus);
   filters.forEach(button => button.addEventListener('click', () => {
     const category = button.dataset.workFilter;
     filters.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
     works.forEach(row => { row.hidden = category !== 'all' && !row.dataset.categories.split(' ').includes(category); });
-    const count = works.filter(row => !row.hidden).length;
-    const status = document.querySelector('.work-filter-status');
-    if (status) status.textContent = document.documentElement.lang === 'en' ? `${count} projects` : `显示 ${count} 个项目`;
+    updateFilterStatus();
   }));
-
-  // Numbers animate once when read, while keeping the literal value in HTML for no-JS users.
-  const counters = [...document.querySelectorAll('[data-count]')];
-  if ('IntersectionObserver' in window && motionAllowed()) {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      observer.unobserve(entry.target);
-      const el = entry.target, final = Number(el.dataset.count), suffix = el.dataset.suffix || '';
-      const start = performance.now(), duration = 520;
-      const frame = time => {
-        if (!motionAllowed()) { el.textContent = `${final}${suffix}`; return; }
-        const t = Math.min(1, (time - start) / duration);
-        el.textContent = `${Math.round(final * (1 - Math.pow(1-t, 3)))}${suffix}`;
-        if (t < 1) requestAnimationFrame(frame);
-      };
-      requestAnimationFrame(frame);
-    }), {threshold:.45});
-    counters.forEach(el => observer.observe(el));
-  }
+  updateFilterStatus();
 
   // Hover previews fetch a video only after deliberate desktop hover. Tap still opens the full player.
   let previewButton = null;
@@ -77,7 +64,7 @@
     let raf = 0;
     document.addEventListener('pointermove', event => {
       if (!motionAllowed() || event.pointerType === 'touch') { cursor.classList.remove('is-active'); return; }
-      const target = event.target.closest('.scene-point,.work-row,.film-cell,.video-cover');
+      const target = event.target.closest('.scene-point,.case-panel-visual,.additional-grid a,.film-cell,.video-cover');
       cursor.classList.toggle('is-active',!!target);
       if (!target) return;
       cursor.textContent = target.matches('.scene-point') ? 'EXPLORE' : target.matches('.external-video-cover') ? 'OPEN' : target.matches('.film-cell,.video-cover') ? 'PLAY' : 'VIEW';

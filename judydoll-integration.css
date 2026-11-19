@@ -1,0 +1,34 @@
+.page-index .studio-heading{z-index:8;color:var(--ink)}.page-index .studio-kicker-zh{opacity:1!important;visibility:visible!important}.page-index .studio-landing .scene-perspective{z-index:1}.judydoll-row img{background:#e9b8b5;object-fit:cover}.judydoll-row h3{color:#ab515b}
+.hr-jd-fast{padding-top:34px;padding-bottom:43px;border-block:1px solid #cdc5bc}.hr-jd-fast>div:first-child>span{font:700 12px Arial,sans-serif;letter-spacing:.14em;color:#a9555d}.hr-jd-fast h2{font-size:clamp(29px,3vw,44px);margin:12px 0}.hr-jd-fast p{color:#65635e}.hr-jd-stats{display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid #cdc5bc;margin:25px 0}.hr-jd-stats>span{padding:15px 10px;border-right:1px solid #cdc5bc}.hr-jd-stats>span:last-child{border:0}.hr-jd-stats b{display:block;color:#a9555d;font:clamp(24px,2.7vw,38px) Georgia,serif}.hr-jd-stats small{font-size:12px}.hr-jd-fast>a{color:#a9555d;font-weight:700;border-bottom:1px solid currentColor}.hr-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hr-feature-jd img{object-fit:cover;background:#e9b8b5}
+@media(max-width:800px){.hr-jd-stats{grid-template-columns:repeat(3,1fr)}.hr-jd-stats>span:nth-child(3){border-right:0}.hr-jd-stats>span:nth-child(-n+3){border-bottom:1px solid #cdc5bc}}
+@media(max-width:650px){.hr-feature-grid{grid-template-columns:1fr}.hr-jd-stats{grid-template-columns:repeat(2,1fr)}.hr-jd-stats>span:nth-child(3){border-right:1px solid #cdc5bc}.hr-jd-stats>span:nth-child(even){border-right:0}.hr-jd-stats>span:nth-child(-n+4){border-bottom:1px solid #cdc5bc}}
+
+/* Genuine brand marks make the two work paths recognizable at first glance. */
+.scene-brand-sticker{position:absolute;z-index:3;pointer-events:none;display:grid;place-items:center;box-shadow:0 9px 19px #3b304734;border:1px solid #fff9}
+.scene-brand-sticker img{display:block;width:88%;height:70%;object-fit:contain}
+.scene-brand-jinhan{left:14%;top:42%;width:19%;height:8%;background:#d71928;transform:rotate(-5deg)}
+.scene-brand-jinhan img{width:94%;height:88%;object-fit:contain}
+.scene-brand-judydoll{left:69%;top:42%;width:22%;height:12%;background:#915466;transform:rotate(7deg)}
+.scene-brand-judydoll img{width:90%;height:auto}
+.point-judydoll .scene-pin{background:#a25062;box-shadow:0 0 0 5px #a2506233,0 6px 15px #18244b20}
+.jinhan-row img{object-fit:contain!important;object-position:center!important;background:#d71928;padding:22px}
+.judydoll-row img{object-fit:contain!important;object-position:center!important;background:#8f5262;padding:40px 22px}
+.drawer-image.jinhan-brand{background:#d71928}
+.drawer-image.judydoll-brand{background:#8f5262}
+.drawer-image.jinhan-brand img,.drawer-image.judydoll-brand img{object-fit:contain;padding:45px}
+.hr-feature .hr-brand-logo{width:187px;height:55px;max-width:100%;object-fit:contain;object-position:left;padding:0;background:#d71928;margin-top:14px}
+.hr-feature-jd img{object-fit:contain;background:#8f5262;padding:48px 32px}
+.hr-hero-collage .hr-hero-brand{object-fit:contain;background:#8f5262;padding:15px}
+.project-banner .banner-note .jinhan-banner-logo{display:block;width:min(230px,100%);height:auto;max-height:none;object-fit:contain;margin:0 0 18px;background:#d71928;padding:6px}
+@media(min-width:1321px){
+  .page-index .nav-links:not(.open)>a[href^="judydoll.html"],
+  .page-recruiters .nav-links:not(.open)>a[href^="judydoll.html"]{display:block}
+  .page-index .nav-links:not(.open)>a[href^="projects.html"],
+  .page-recruiters .nav-links:not(.open)>a[href^="projects.html"]{display:none}
+}
+@media(max-width:700px){
+  .scene-brand-jinhan{left:14%;top:42%;width:20%;height:9%}
+  .scene-brand-judydoll{left:67%;top:41%;width:25%;height:13%}
+  .jinhan-row img{padding:22px}.judydoll-row img{padding:38px 24px}
+  .drawer-image.jinhan-brand img,.drawer-image.judydoll-brand img{padding:36px}
+}

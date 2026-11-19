@@ -86,3 +86,4 @@ html[data-theme="night"] .home-awards-list small{color:#c2c8c1}
   .nav-links.open>a{display:block}
   .menu-button{display:block;margin-left:2px}
 }
+@media(min-width:1321px) and (max-width:1600px){.nav-links:not(.open)>a[href^="jinhan.html"]{display:block}}

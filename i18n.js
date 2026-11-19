@@ -7,11 +7,14 @@
   const records = new WeakMap();
   const attributes = new WeakMap();
   const protectedSelector = 'script,style,pre,noscript,.copy-body,[data-original],[data-language-control]';
+  const languageControls = [...document.querySelectorAll('[data-language-control]')];
   let language = root.lang === 'en' ? 'en' : 'zh-CN';
   let scheduled = false;
   const translate = value => {
     const s = String(value ?? '');
-    if (dictionary[s] !== undefined) return dictionary[s];
+    if (Object.hasOwn(dictionary,s)) return dictionary[s];
+    const trimmed = s.trim();
+    if (Object.hasOwn(dictionary,trimmed)) return s.replace(trimmed,dictionary[trimmed]);
     return s.replace(pattern, match => dictionary[match]);
   };
   function renderValue(value, record) {
@@ -29,11 +32,13 @@
       if (node.nodeValue !== r.rendered) node.nodeValue = r.rendered;
     }
     document.querySelectorAll('[aria-label],[alt],[title],[placeholder],meta[name="description"]').forEach(el => {
-      if (el.closest(protectedSelector)) return;
+      if (el.closest('[data-language-control],.copy-body')) return;
       const map = attributes.get(el) || {};
       for (const key of ['aria-label','alt','title','placeholder',...(el.tagName === 'META' ? ['content'] : [])]) {
         if (!el.hasAttribute(key)) continue;
         const r = renderValue(el.getAttribute(key),map[key]);
+        const explicitEnglish = el.getAttribute(`data-en-${key}`);
+        if (language === 'en' && explicitEnglish) r.rendered = explicitEnglish;
         map[key]=r;
         if (el.getAttribute(key) !== r.rendered) el.setAttribute(key,r.rendered);
       }
@@ -41,8 +46,8 @@
     });
     const title = document.querySelector('title');
     const r = renderValue(title.textContent,records.get(title));
-    records.set(title,r); title.textContent=r.rendered;
-    document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.lang===language)));
+    records.set(title,r); if (title.textContent !== r.rendered) title.textContent=r.rendered;
+    languageControls.forEach(button => button.setAttribute('aria-pressed',String(button.dataset.lang===language)));
     document.querySelectorAll('a[href]').forEach(a => {
       const href=a.getAttribute('href');
       if (!/^[a-z-]+\.html(?:[?#]|$)/i.test(href)) return;
@@ -80,6 +85,6 @@
     }));
   }
   window.PortfolioLocale={translate,apply,get language(){return language;},setLanguage};
-  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
+  languageControls.forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
   apply();
 })();

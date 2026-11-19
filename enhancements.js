@@ -2,7 +2,7 @@
   'use strict';
   const root=document.documentElement;
   const read=()=>{try{return JSON.parse(localStorage.getItem('lin-studio-explored')||'[]')}catch{return []}};
-  const known=['jinhan','motion','momo','editorial','home'];
+  const known=['jinhan','motion','judydoll','editorial','home'];
   const restored=read();
   const visited=new Set(Array.isArray(restored)?restored.filter(x=>known.includes(x)):[]);
   const updateProgress=()=>{

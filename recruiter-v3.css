@@ -58,3 +58,11 @@ html[lang="en"] .hr-v3 .en{display:inline}
 @media(max-width:650px){.hr-motion{padding:60px 0 65px}.hr-motion-head{grid-template-columns:1fr}.hr-motion-head h2{font-size:38px}.hr-motion-head p{font-size:16px}.hr-motion-grid{gap:12px}.hr-motion-visual{height:245px}.hr-motion-grid strong{font-size:16px}.hr-motion-no{font-size:10px}.hr-feature-proof img{height:300px}.hr-feature-actions{gap:12px}}
 @media(max-width:390px){.hr-motion-visual{height:205px}}
 @media(prefers-reduced-motion:reduce){.hr-motion-visual img{transition:none}.hr-motion-grid button:hover img{transform:none}}
+.hr-close-actions { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.hr-close-actions a { align-self: flex-start; overflow-wrap: anywhere; }
+.hr-close-actions a { border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+@media (max-width: 650px) {
+  .hr-hero-actions { gap: 12px 18px; margin: 24px 0; }
+  .hr-hero-actions .hr-quiet { font-size: 14px; }
+  .hr-close-actions { margin-top: 20px; }
+}
