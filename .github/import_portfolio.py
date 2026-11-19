@@ -29,7 +29,7 @@ def import_one(record):
         if hashlib.sha256(destination.read_bytes()).hexdigest() == expected_hash:
             return False
 
-    url = BASE_URL + quote(relative_path, safe="/")
+    url = BASE_URL + quote(relative_path, safe="/") + "?v=" + expected_hash[:16]
     for attempt in range(4):
         temp_path = None
         try:
