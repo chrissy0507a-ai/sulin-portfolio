@@ -49,7 +49,7 @@ def import_one(record):
                     digest.update(chunk)
                     size += len(chunk)
             if size != expected_size or digest.hexdigest() != expected_hash:
-                raise ValueError(f"File checksum mismatch: {relative_path} ({size} bytes, sha256={digest.hexdigest()})")
+                raise ValueError(f"File checksum mismatch: {relative_path} ({size} bytes, sha256={digest.hexdigest()}, preview={temp_path.read_bytes()[:200]!r})")
             temp_path.replace(destination)
             return True
         except Exception:
