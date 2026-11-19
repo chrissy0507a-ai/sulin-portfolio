@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/import-portfolio.yml
       - .github/import_portfolio.py
+      - portfolio-files.tsv
   workflow_dispatch:
 
 permissions:
