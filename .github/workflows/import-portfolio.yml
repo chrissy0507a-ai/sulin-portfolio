@@ -6,6 +6,7 @@ on:
       - .github/workflows/import-portfolio.yml
       - .github/import_portfolio.py
       - portfolio-files.tsv
+      - index.html
   workflow_dispatch:
 
 permissions:
