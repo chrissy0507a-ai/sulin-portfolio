@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "portfolio-files.tsv"
-BASE_URL = "https://sulin-creative-portfolio-2026.chrissy0507a.chatgpt.site/"
+BASE_URL = "https://sulin-creative-portfolio-v2.chrissy0507a.chatgpt.site/"
 
 
 def import_one(record):
@@ -66,11 +66,7 @@ def main():
         expected_hash, size, path = line.split("\t", 2)
         if not path or path.startswith("/") or ".." in Path(path).parts:
             raise ValueError(f"Unsafe path: {path}")
-        # The public Site serves modified HTML, so its byte hashes cannot match
-        # the original source. Import only static assets here; source pages are
-        # synchronized separately and existing root files stay intact.
-        if not path.startswith("assets/"):
-            continue
+        # Every file is fetched from the current public Site and hash-verified.
         records.append((expected_hash, int(size), path))
 
     updated = 0
